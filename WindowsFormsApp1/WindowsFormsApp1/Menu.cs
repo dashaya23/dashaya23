@@ -21,8 +21,7 @@ namespace WindowsFormsApp1
         private void Menu_Load(object sender, EventArgs e)
         {
             Program.connection.Open();
-            comboBoxFilter.Items.Add("Все производители");
-            comboBoxFilter.SelectedIndex = 0;
+            FillMyPanel();
             if(Program.userRole == null || (int)Program.userRole == 2 || (int)Program.userRole == 3)
             {
                 buttonAdd.Visible = false;
@@ -38,29 +37,12 @@ namespace WindowsFormsApp1
             }
             labelFIO.Text = $"{Program.userSurame} {Program.userName} {Program.userPatronymic}";
 
-            var cmd = new NpgsqlCommand($"Select categoryname From category", Program.connection);
-            NpgsqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read()) 
-            { 
-                comboBoxFilter.Items.Add(reader.GetString(0));
-            }
-            reader.Close();
-            cmd.Cancel();
         }
 
         private void FillMyPanel()
         {
             flowLayoutPanelProduct.Controls.Clear();
-            int count = 0;
-            string filter = string.Empty;
-            if(comboBoxFilter.Items.Count > 0) 
-            {
-                filter = $"AND product.productmanufid = '{comboBoxFilter.SelectedIndex}'";
-            }
-            string sort = string.Empty;
-            if(radioButtonASC.Checked) { sort = "ASC"; }
-            else { sort = "DESC"; }
-            string querty = $"SELECT *, manufname FROM product, manuf Where (productname LIKE '' or productdesc LIKE '') AND (product.productmanufid = manuf.manufid " + filter +") ORDER BY productcost " + sort;
+            string querty = $"SELECT * FROM product, manuf Where product.productmanufid = manuf.manufid ORDER BY productcost ASC";
             NpgsqlCommand cmd = new NpgsqlCommand(querty, Program.connection);
             NpgsqlDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
@@ -74,19 +56,10 @@ namespace WindowsFormsApp1
                 PictureBox picture = new PictureBox();
                 picture.Size = new Size(125, 89);
                 picture.Location = new Point(10, 17);
-                picture.SizeMode = PictureBoxSizeMode.AutoSize;
-                string part = reader["productfoto"].ToString();
-                if(part == null)
-                {
-                    picture.Image = Properties.Resources.picture;
-                }
-                else
-                {
-                    part = Environment.CurrentDirectory + "\\Товар_import\\" + reader["productfoto"].ToString();
-                    picture.Load(part);
-                }
+                picture.SizeMode = PictureBoxSizeMode.Zoom;
+                picture.Image = Properties.Resources.pick;
                 Product.Controls.Add(picture);
-
+                 
                 Label productname = new Label();
                 productname.Name = reader.GetValue(0).ToString();
                 productname.Size = new Size(71, 19);
@@ -94,7 +67,6 @@ namespace WindowsFormsApp1
                 productname.Font = new Font("Comic Sans MS", 10);
                 productname.Text = reader["productname"].ToString();
                 Product.Controls.Add(productname);
-
 
                 Label productdesc = new Label();
                 productdesc.Name = reader.GetValue(0).ToString();
@@ -108,8 +80,8 @@ namespace WindowsFormsApp1
 
                 Label productquan = new Label();
                 productquan.Name = reader.GetValue(0).ToString();
-                productquan.Size = new Size(71, 19);
-                productquan.Location = new Point(195, 17);
+                productquan.Size = new Size(71, 38);
+                productquan.Location = new Point(834, 17);
                 productquan.Font = new Font("Comic Sans MS", 10);
                 if(reader.GetInt32(9)>0)
                 {
@@ -123,16 +95,11 @@ namespace WindowsFormsApp1
                 }
                 Product.Controls.Add(productquan);
                 Product.Click += Product_Click;
-                count++;
+                
                 flowLayoutPanelProduct.Controls.Add(Product);
             }
             reader.Close();
             cmd.Cancel();
-
-            var cmdCount = new NpgsqlCommand("Select count(*) from product", Program.connection);
-            int count1 = Convert.ToInt32(cmdCount.ExecuteScalar());
-            labelCount.Text = count + " из " + count1;
-            cmdCount.Cancel();
         }
 
         private void Product_Click(object sender, EventArgs e)

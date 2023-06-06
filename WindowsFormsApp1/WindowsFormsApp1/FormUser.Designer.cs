@@ -39,13 +39,9 @@
             this.textBoxPas = new System.Windows.Forms.TextBox();
             this.buttonVoiti = new System.Windows.Forms.Button();
             this.buttonGost = new System.Windows.Forms.Button();
-            this.pictureBoxCaptcha = new System.Windows.Forms.PictureBox();
-            this.buttonCaptchaRefref = new System.Windows.Forms.Button();
-            this.textBoxCaptcha = new System.Windows.Forms.TextBox();
             this.timerCaptcha = new System.Windows.Forms.Timer(this.components);
             this.panelVerh.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLog)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCaptcha)).BeginInit();
             this.SuspendLayout();
             // 
             // panelVerh
@@ -138,47 +134,12 @@
             this.buttonGost.UseVisualStyleBackColor = false;
             this.buttonGost.Click += new System.EventHandler(this.buttonGost_Click);
             // 
-            // pictureBoxCaptcha
-            // 
-            this.pictureBoxCaptcha.Location = new System.Drawing.Point(104, 341);
-            this.pictureBoxCaptcha.Name = "pictureBoxCaptcha";
-            this.pictureBoxCaptcha.Size = new System.Drawing.Size(235, 75);
-            this.pictureBoxCaptcha.TabIndex = 7;
-            this.pictureBoxCaptcha.TabStop = false;
-            // 
-            // buttonCaptchaRefref
-            // 
-            this.buttonCaptchaRefref.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(227)))), ((int)(((byte)(131)))));
-            this.buttonCaptchaRefref.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCaptchaRefref.Location = new System.Drawing.Point(155, 458);
-            this.buttonCaptchaRefref.Name = "buttonCaptchaRefref";
-            this.buttonCaptchaRefref.Size = new System.Drawing.Size(126, 32);
-            this.buttonCaptchaRefref.TabIndex = 8;
-            this.buttonCaptchaRefref.Text = "Обновить";
-            this.buttonCaptchaRefref.UseVisualStyleBackColor = false;
-            this.buttonCaptchaRefref.Click += new System.EventHandler(this.buttonCaptchaRefref_Click);
-            // 
-            // textBoxCaptcha
-            // 
-            this.textBoxCaptcha.Location = new System.Drawing.Point(155, 422);
-            this.textBoxCaptcha.Name = "textBoxCaptcha";
-            this.textBoxCaptcha.Size = new System.Drawing.Size(126, 26);
-            this.textBoxCaptcha.TabIndex = 9;
-            // 
-            // timerCaptcha
-            // 
-            this.timerCaptcha.Interval = 10000;
-            this.timerCaptcha.Tick += new System.EventHandler(this.timerCaptcha_Tick);
-            // 
             // FormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(429, 331);
-            this.Controls.Add(this.textBoxCaptcha);
-            this.Controls.Add(this.buttonCaptchaRefref);
-            this.Controls.Add(this.pictureBoxCaptcha);
             this.Controls.Add(this.buttonGost);
             this.Controls.Add(this.buttonVoiti);
             this.Controls.Add(this.textBoxPas);
@@ -189,7 +150,7 @@
             this.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximumSize = new System.Drawing.Size(445, 560);
+            this.MaximumSize = new System.Drawing.Size(445, 370);
             this.MinimumSize = new System.Drawing.Size(445, 370);
             this.Name = "FormUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -198,7 +159,6 @@
             this.panelVerh.ResumeLayout(false);
             this.panelVerh.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLog)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCaptcha)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,9 +175,6 @@
         private System.Windows.Forms.TextBox textBoxPas;
         private System.Windows.Forms.Button buttonVoiti;
         private System.Windows.Forms.Button buttonGost;
-        private System.Windows.Forms.PictureBox pictureBoxCaptcha;
-        private System.Windows.Forms.Button buttonCaptchaRefref;
-        private System.Windows.Forms.TextBox textBoxCaptcha;
         private System.Windows.Forms.Timer timerCaptcha;
     }
 }
